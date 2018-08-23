@@ -1,0 +1,73 @@
+.monster-match {
+  max-width: 992px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Sans-serif;
+}
+
+.name-row, .picture-row, .hitpoints-row, .skills-row, .turn-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+}
+.name-row__user, .name-row__monster {
+  width: 50%;
+  height: 50px;
+}
+.picture-row {
+  margin: 20px 0;
+}
+.picture-row__user, .picture-row__monster {
+  max-width: 50%;
+  max-height: 50%;
+}
+.picture-row__user img {
+  max-width: 50%;
+  max-height: 50%;
+  border: 1px solid #fff;
+}
+.picture-row__monster img {
+  max-width: 75%;
+  max-height: 50%;
+}
+.picture-row .turn {
+  border: 1px solid #f4c542;
+}
+.hitpoints-row__user, .hitpoints-row__monster {
+  width: calc(50% - 10px);
+  text-align: center;
+  line-height: 30px;
+  position: relative;
+  border: 1px solid #c1c1c1;
+  margin: 0 5px;
+}
+.hitpoints-row__user p, .hitpoints-row__monster p {
+  margin: 0;
+  z-index: 20;
+  position: relative;
+}
+.progress-bar {
+  height: 30px;
+  background-color: #59f442;
+  transition: .2s;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.message-row {
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+}
+.skills-row button {
+  border: 3px solid #f49542;
+  border-radius: 3px;
+  margin: 5px;
+  padding: 5px 10px;
+  background-color: #f4c542;
+  text-align: center;
+  cursor: pointer;
+}
+

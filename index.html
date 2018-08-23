@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>
+      Monster Fight!
+    </title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="monster-match">
+        <div class="name-row">
+          <div class="name-row__user"><h2>{{ user.name }}</h2></div>
+          <div class="name-row__monster"><h2>{{ monster.name }}</h2></div>
+        </div>
+        <div class="picture-row">
+          <div class="picture-row__user" :class="{turn: yourTurn}">
+            <img :src="user.picture">
+          </div>
+          <div class="picture-row__monster">
+            <img :src="monster.picture" :class="{turn: !yourTurn}">
+          </div>
+        </div>
+        <div class="hitpoints-row">
+          <div class="hitpoints-row__user"><p>{{ user.health }} HP</p>
+            <div class="progress-bar" :style="{width: user.health + '%'}"></div>
+          </div>
+          <div class="hitpoints-row__monster"><p>{{ monster.health }} HP</p>
+              <div class="progress-bar" :style="{width: monster.health + '%'}"></div>
+          </div>
+        </div>
+        <div class="message-row">{{ message }}</div>
+        <template v-if="(user.health > 0) && (monster.health > 0)">
+          <div class="turn-counter">
+              <p v-if="yourTurn">It's Your Turn</p>
+              <p v-if="!yourTurn">It's the Monster's Turn</p>
+          </div>
+          <div class="skills-row">
+            <button @click="heroAttack">Attack</button>
+            <button @click="heroSpecialAttack" v-if="user.superStrengthCount > 0">Special Attack ({{ user.superStrengthCount }} left)</button>
+            <button @click="heal" v-if="user.healing > 0">Heal ({{ user.healing }} healing potions left)</button>
+          </div>
+        </template>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
