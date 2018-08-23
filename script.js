@@ -22,6 +22,7 @@ new Vue({
       ac: 15,
       health: 100 
     },
+    turnsLog: [],
     yourTurn: true,
     message: ''
   },
@@ -46,8 +47,13 @@ new Vue({
       if(this.monster.health > 0) {
         setTimeout(function() {
           var returning = self.launch(self.monster.thaco, self.monster.ac, self.monster.strength);
-          self.user.health = self.user.health -= returning.result;
+          var damage = returning.result;
+          self.user.health = self.user.health -= damage;
           self.message = returning.message;
+          self.turnsLog.unshift({
+            isPlayer: false,
+            message: "The Monster hits you for " + damage + " Hit Points!"
+          }); 
           self.yourTurn = true;
           if(self.user.health <= 0) {
             self.healing = 0;
@@ -64,16 +70,26 @@ new Vue({
     },
     heroAttack: function() {
       var returned = this.launch(this.user.thaco, this.user.ac, this.user.strength);
-      this.monster.health = this.monster.health -= returned.result;
+      var damage = returned.result;
+      this.monster.health = this.monster.health -= damage;
       this.message = returned.message;
+      this.turnsLog.unshift({
+        isPlayer: true,
+        message: "You hit the Monster for " + damage + " Hit Points!"
+      });
       this.winning();
       this.monsterAttack();
     },
     heroSpecialAttack: function() {
       var returned = this.launch(this.user.thaco, this.user.ac, this.user.superStrength);
-      this.monster.health = this.monster.health -= returned.result;
+      var damage = returned.result;
+      this.monster.health = this.monster.health -= damage;
       this.user.superStrengthCount--;
       this.message = returned.message;
+      this.turnsLog.unshift({
+        isPlayer: true,
+        message: "You hit the Monster for " + damage + " Hit Points with your Special Attack!"
+      });
       this.winning();
       this.monsterAttack();
     },
@@ -81,9 +97,17 @@ new Vue({
       if(this.user.health < this.user.permaHealth) {
         this.user.health = this.user.health + this.user.healAmount;
         this.user.healing--;
+        this.turnsLog.unshift({
+          isPlayer: true,
+          message: "You heal yourself for " + this.user.healAmount + " Hit Points!"
+        });
       } else {
         this.message = "you can't heal above your maximum HP!!"
         this.user.healing--;
+        this.turnsLog.unshift({
+          isPlayer: true,
+          message: "You just wasted a Healing Potion Like an Idiot!"
+        });
       }
       this.monsterAttack();
     }

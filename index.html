@@ -44,6 +44,11 @@
             <button @click="heal" v-if="user.healing > 0">Heal ({{ user.healing }} healing potions left)</button>
           </div>
         </template>
+        <div class="battle-log">
+          <ul>
+            <li v-for="messages in turnsLog" :class="{'user-logged-turn': messages.isPlayer, 'monster-logged-turn': !messages.isPlayer}">{{ messages.message }}</li>
+          </ul>
+        </div>
       </div>
     </div>
     <script src="script.js"></script>

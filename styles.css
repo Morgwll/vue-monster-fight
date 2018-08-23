@@ -5,7 +5,18 @@
   text-align: center;
   font-family: Sans-serif;
 }
-
+.battle-log ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.user-logged-turn {
+  background-color: #42d1f4;
+  padding: 5px;
+}
+.monster-logged-turn {
+  background-color: #f45c42;
+  padding: 5px;
+}
 .name-row, .picture-row, .hitpoints-row, .skills-row, .turn-counter {
   display: flex;
   justify-content: center;
