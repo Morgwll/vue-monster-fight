@@ -31,8 +31,9 @@
   margin: 20px 0;
 }
 .picture-row__user, .picture-row__monster {
-  width: 50%;
+  width: calc(50% - 10px);
   max-height: 50%;
+  margin: 5px;
 }
 .picture-row__user img {
   max-width: 50%;
